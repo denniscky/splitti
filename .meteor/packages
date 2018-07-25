@@ -27,7 +27,7 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 spiderable
 meteortoys:allthings
 raix:handlebar-helpers
-aldeed:simple-schema
 aldeed:collection2
 aldeed:autoform
 twbs:bootstrap
+mdg:validated-method

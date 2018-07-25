@@ -1,7 +1,13 @@
 import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 
 class MealsCollection extends Mongo.Collection {
+  insert(input, callback) {
+    const actualInput = input;
+    actualInput.code = "ABCD";
+    console.log("before super", actualInput); 
+    return super.insert(actualInput, {});
+  }
 }
 
 export const Meals = new MealsCollection('meals');
@@ -14,9 +20,9 @@ export const Meals = new MealsCollection('meals');
 // });
 
 Meals.schema = new SimpleSchema({
-  code: { type: String },
-  tax: { type: Number },
-  tip: { type: Number },
+  code: { type: String }
+  // tax: { type: Number },
+  // tip: { type: Number },
 });
 
 Meals.attachSchema(Meals.schema);
