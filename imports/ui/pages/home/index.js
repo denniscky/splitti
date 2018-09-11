@@ -1,10 +1,8 @@
-import { Meals } from '../../../api/meals/meals.js';
-import { mealsInsert } from '../../../api/meals/methods.js';
+// import { $ } from 'meteor/jquery';
 
 import './index.html';
 
-// import '../../components/hello/hello.js';
-// import '../../components/info/info.js';
+import { mealsInsert } from '../../../api/meals/methods.js';
 
 Template.Home_index.helpers({
   // counter() {
@@ -12,37 +10,35 @@ Template.Home_index.helpers({
   // },
 });
 
-Template.Home_index.events({
-  'click .btn-create-meal'(event, instance) {
-    console.log('click me!');
-    // Meals.insert({}, null);
-    // mealsInsert.call({}, (err) => {
-    //   if (err) {
-    //     console.log("err", err);
-    //   }
-
-    //   console.log("finito");
-    // });
-
-
-    const listId = mealsInsert.call((err) => {
-      if (err) {
-        console.log("err", err);
-      }
-    });
-
-    // Meteor.call('mealsInsert', (error) => {
-    //   if (error) {
-    //     alert(error.error);
-    //   }
-    // });
-  },
-});
+// Template.Home_index.events({
+//   'click .btn-create-meal'(event, instance) {
+//     console.log('click me!');
+//     const mealId = mealsInsert.call({
+//       code: "ABCD"
+//     }, (err) => {
+//       if (err) { console.log("err", err); }
+//     });
+//
+//     console.log(mealId);
+//   },
+//
+//   'click .btn-join-meal'(event, instance) {
+//     console.log('click me!', $('.meal-code-input').val());
+//
+//
+//     // const participantId = participantsInsert.call({
+//     //   name: "ABCD"
+//     // }, (err) => {
+//     //   if (err) { console.log("err", err); }
+//     // });
+//     //
+//     // console.log(mealId);
+//   }
+// });
 
 Template.Home_index.onCreated(function appBodyOnCreated() {
-  console.log("subscribing");
-  this.subscribe('meals.public');
-  this.subscribe('meals.private');
+  this.subscribe('meals.all');
+  this.subscribe('participants.all');
 
   // this.state = new ReactiveDict();
   // this.state.setDefault({

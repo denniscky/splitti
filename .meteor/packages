@@ -13,7 +13,7 @@ tracker@1.2.0
 
 # standard libraries
 jquery@1.11.10
-underscore@1.0.10 #
+# underscore@1.0.10
 less@2.7.12
 
 # ui
@@ -22,8 +22,8 @@ reactive-dict@1.2.0
 reactive-var@1.0.11
 aldeed:template-extension
 percolate:momentum
-# twbs:bootstrap # non-standard
-# raix:handlebar-helpers # non-standard
+twbs:bootstrap # non-standard
+raix:handlebar-helpers # non-standard
 
 # data
 mongo@1.5.0
@@ -44,40 +44,40 @@ zimme:active-route
 tap:i18n #
 
 # accounts
-accounts-password@1.5.1 #
-useraccounts:core #
-useraccounts:unstyled #
-useraccounts:flow-routing #
-softwarerero:accounts-t9n #
+# accounts-password@1.5.1
+# useraccounts:core
+# useraccounts:unstyled
+# useraccounts:flow-routing
+# softwarerero:accounts-t9n
 
 # mobile
-crosswalk@1.7.1 #
+# crosswalk@1.7.1
 mobile-experience@1.0.5
-chriswessels:hammer #
+# chriswessels:hammer
 
 # production
-# juliancwirko:postcss #
+# juliancwirko:postcss
 standard-minifier-js@2.3.4
-ddp-rate-limiter@1.0.7 #
-# app-prod-security # 
-# spiderable # non-standard
-# standard-minifier-css@1.4.1 # non-standard
+# ddp-rate-limiter@1.0.7
+# app-prod-security
+spiderable # non-standard
+standard-minifier-css@1.4.1 # non-standard
 
 # rest apis
-simple:rest-accounts-password #
-simple:rest #
+# simple:rest-accounts-password
+# simple:rest
 
 # testing
-xolvio:cleaner #
-practicalmeteor:chai #
-practicalmeteor:sinon #
+# xolvio:cleaner
+# practicalmeteor:chai
+# practicalmeteor:sinon
 meteortesting:mocha
-hwillson:stub-collections #
+# hwillson:stub-collections
 johanbrook:publication-collector
 shell-server@0.3.1
-dburles:factory #
-# meteortoys:allthings # non-standard
+# dburles:factory
+meteortoys:allthings # non-standard
 
 # security
-audit-argument-checks@1.0.7 #
-dynamic-import@0.4.0 #
+# audit-argument-checks@1.0.7
+# dynamic-import@0.4.0

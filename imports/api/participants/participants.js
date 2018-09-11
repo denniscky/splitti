@@ -1,7 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-class MealsCollection extends Mongo.Collection {
+class ParticipantsCollection extends Mongo.Collection {
   insert(input, callback) {
     const realInput = input;
     realInput.createdAt = new Date();
@@ -9,29 +9,34 @@ class MealsCollection extends Mongo.Collection {
   }
 }
 
-export const Meals = new MealsCollection('meals');
+export const Participants = new ParticipantsCollection('participants');
 
 // Deny all client-side updates since we will be using methods to manage this collection
-Meals.deny({
+Participants.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; },
 });
 
-Meals.schema = new SimpleSchema({
+Participants.schema = new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
-  code: { type: String },
+  name: { type: String },
+  listId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    denyUpdate: true
+  },
   createdAt: {
     type: Date,
     denyUpdate: true  // If you set denyUpdate: true, any collection update that modifies the field will fail.
   }
 });
 
-Meals.attachSchema(Meals.schema);
+Participants.attachSchema(Participants.schema);
 
 // This represents the keys that should be published
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
-Meals.publicFields = {
-  code: 1
+Participants.publicFields = {
+  name: 1
 };
