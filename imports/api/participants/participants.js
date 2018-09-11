@@ -21,7 +21,7 @@ Participants.deny({
 Participants.schema = new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
   name: { type: String },
-  listId: {
+  mealId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true

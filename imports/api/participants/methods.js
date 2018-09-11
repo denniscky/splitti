@@ -8,6 +8,7 @@ export const participantsInsert = new ValidatedMethod({
   name: 'participants.insert',
   validate: Participants.simpleSchema().pick(['name', 'mealId']).validator(),
   run(input) {
+    console.log('method input', input);
     return Participants.insert(input, null);
   }
 });
