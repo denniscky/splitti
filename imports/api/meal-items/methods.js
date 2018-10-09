@@ -6,7 +6,11 @@ import { MealItems } from './meal-items.js';
 
 export const mealItemsInsert = new ValidatedMethod({
   name: 'meal-items.insert',
-  validate: MealItems.simpleSchema().pick(['name']).validator(),
+  validate: MealItems.simpleSchema().pick([
+    'mealId',
+    'name',
+    'price'
+  ]).validator(),
   run(input) {
     return MealItems.insert(input, null);
   }

@@ -20,6 +20,7 @@ MealItems.deny({
 
 MealItems.schema = new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
+  mealId: { type: String, regEx: SimpleSchema.RegEx.Id },
   name: { type: String },
   price: { type: Number },
   createdAt: {
@@ -34,5 +35,5 @@ MealItems.attachSchema(MealItems.schema);
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
 MealItems.publicFields = {
-  code: 1
+  name: 1
 };
