@@ -12,7 +12,7 @@
   <div class="container">
     <button class="btn-new-item btn btn-primary">+ Add an item</button>
     {{#each mealItem in mealItems}}
-      <li>asdf</li>
+      {{> MealItems_show (mealItemArgs mealItem)}}
     {{/each}}
   </div>
 </template>

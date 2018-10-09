@@ -14,6 +14,7 @@ Template.MealItems_new.events({
     const mealItemId = mealItemsInsert.call({
       mealId: mealId,
       name: $('.input-meal-item-name').val().trim(),
+      participantIds: [  ],
       price: parseFloat($('.input-meal-item-price').val().trim()).toFixed(2) * 100
     }, (err) => {
       if (err) {

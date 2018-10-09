@@ -22,6 +22,14 @@ MealItems.schema = new SimpleSchema({
   _id: { type: String, regEx: SimpleSchema.RegEx.Id },
   mealId: { type: String, regEx: SimpleSchema.RegEx.Id },
   name: { type: String },
+  participantIds: {
+    type: Array,
+    minCount: 1
+  },
+  'participantIds.$': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
   price: { type: Number },
   createdAt: {
     type: Date,
@@ -35,5 +43,12 @@ MealItems.attachSchema(MealItems.schema);
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
 MealItems.publicFields = {
+  mealId: 1,
   name: 1
 };
+
+MealItems.helpers({
+  priceString() {
+    return `$${this.price / 100}.00`;
+  }
+});
