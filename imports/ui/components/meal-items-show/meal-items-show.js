@@ -23,6 +23,9 @@ Template.MealItems_show.helpers({
 Template.MealItems_show.events({
   'click .btn-edit-meal-item'(event, instance) {
     console.log('click .btn-create-meal-item', Template.currentData().mealItem);
-    FlowRouter.go('MealItems.edit', { _mealItemId: Template.currentData().mealItem._id });
+    FlowRouter.go('MealItems.edit', {
+      _mealId: Template.currentData().mealItem.mealId,
+      _mealItemId: Template.currentData().mealItem._id
+    });
   }
 });

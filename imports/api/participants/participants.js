@@ -40,6 +40,5 @@ Participants.attachSchema(Participants.schema);
 // This represents the keys that should be published
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
-Participants.publicFields = {
-  name: 1
-};
+// Participants.publicFields = {
+// };

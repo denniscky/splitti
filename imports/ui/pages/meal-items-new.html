@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <label>Split between...</label>
-      {{#each participant in allParticipantsSorted}}
+      {{#each participant in meal.participantsSorted}}
         <div class="checkbox">
           <label>
             <input class="check-individual" type="checkbox" value="{{participant._id}}" checked={{#if isParticipantMe participant}}checked{{/if}}>

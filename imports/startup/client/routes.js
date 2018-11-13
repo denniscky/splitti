@@ -31,7 +31,7 @@ FlowRouter.route('/meals/:_mealId/meal_items/new', {
   },
 });
 
-FlowRouter.route('/meal_items/:_mealItemId/edit', {
+FlowRouter.route('/meals/:_mealId/meal_items/:_mealItemId/edit', {
   name: 'MealItems.edit',
   action() {
     BlazeLayout.render('App_body', { main: 'MealItems_edit' });

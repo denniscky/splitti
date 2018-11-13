@@ -2,18 +2,19 @@ import './meal-items-edit.html';
 import { mealItemsUpdate } from "../../api/meal-items/methods";
 
 // imports for models
+import { Meals } from '../../api/meals/meals.js';
 import { MealItems } from '../../api/meal-items/meal-items.js';
-import { Participants } from '../../api/participants/participants.js';
 
 Template.MealItems_edit.onCreated(function() {
   this.getMealItemId = () => FlowRouter.getParam('_mealItemId');
+  this.getMealId = () => FlowRouter.getParam('_mealId');
+
+  this.getMeal = () => {
+    return Meals.findOne(this.getMealId());
+  };
 
   this.getMealItem = () => {
     return MealItems.findOne(this.getMealItemId());
-  };
-
-  this.getMealId = () => {
-    return this.getMealItem().mealId;
   };
 
   this.generateParticipantIds = () => {
@@ -34,22 +35,18 @@ Template.MealItems_edit.helpers({
     return instance.getMealItem();
   },
 
+  meal() {
+    const instance = Template.instance();
+    return instance.getMeal();
+  },
+
   isParticipantMe(participant) {
     return participant._id === Session.get('participantId');
   },
 
   isParticipantIncluded(participant) {
     const instance = Template.instance();
-    console.log('isParticipantIdIncluded', instance.getMealItem().participantIds);
     return instance.getMealItem().participantIds.indexOf(participant._id) !== -1;
-  },
-
-  allParticipantsSorted() {
-    const instance = Template.instance();
-    return Participants.find(
-      { mealId: instance.getMealId() },
-      { sort: { name: 1 }}
-    );
   }
 });
 

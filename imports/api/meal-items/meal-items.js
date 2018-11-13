@@ -51,10 +51,8 @@ MealItems.attachSchema(MealItems.schema);
 // This represents the keys that should be published
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
-MealItems.publicFields = {
-  mealId: 1,
-  name: 1
-};
+// MealItems.publicFields = {
+// };
 
 MealItems.helpers({
   priceString() {

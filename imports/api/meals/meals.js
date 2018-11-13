@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // imports for other models
-// [none]
+import { Participants } from '../participants/participants.js';
 
 class MealsCollection extends Mongo.Collection {
   insert(input, callback) {
@@ -35,6 +35,15 @@ Meals.attachSchema(Meals.schema);
 // This represents the keys that should be published
 // to the client. If we add secret properties, don't list
 // them here to keep them private to the server.
-Meals.publicFields = {
-  code: 1
-};
+// Meals.publicFields = {
+// };
+
+Meals.helpers({
+  participantsSorted() {
+    console.log("participantsSorted");
+    return Participants.find(
+      { mealId: this._id },
+      { sort: { name: 1 }}
+    );
+  }
+});
