@@ -1,7 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-// includes of other models
+// imports for other models
 // [none]
 
 class ParticipantsCollection extends Mongo.Collection {

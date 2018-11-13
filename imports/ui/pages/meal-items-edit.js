@@ -1,11 +1,16 @@
-import './meal-items-new.html';
-import {mealItemsInsert} from "../../api/meal-items/methods";
+import './meal-items-edit.html';
+import { mealItemsInsert } from "../../api/meal-items/methods";
 
 // imports for models
+import { MealItems } from '../../api/meal-items/meal-items.js';
 import { Participants } from '../../api/participants/participants.js';
 
-Template.MealItems_new.onCreated(function() {
-  this.getMealId = () => FlowRouter.getParam('_mealId');
+Template.MealItems_edit.onCreated(function() {
+  this.getMealItemId = () => FlowRouter.getParam('_mealItemId');
+
+  this.getMealItem = () => {
+    MealItems.findOne(this.getMealItemId());
+  };
 
   this._generateParticipantIds = () => {
     if ($('.check-everyone').prop('checked')) {
@@ -19,12 +24,12 @@ Template.MealItems_new.onCreated(function() {
   }
 });
 
-Template.MealItems_new.onRendered(function() {
-  $('#input-meal-item-name').focus();
-});
+Template.MealItems_edit.helpers({
+  mealItem() {
+    Template.instance().getMealItem();
+  },
 
-Template.MealItems_new.helpers({
-  isParticipantMe(participant) {
+  isParticipantIdIncluded(participantId) {
     return participant._id === Session.get('participantId');
   },
 
@@ -37,7 +42,7 @@ Template.MealItems_new.helpers({
   }
 });
 
-Template.MealItems_new.events({
+Template.MealItems_edit.events({
   'click .btn-create-meal-item'(event, instance) {
     console.log('click .btn-create-meal-item', instance._generateParticipantIds());
     let mealId = instance.getMealId();

@@ -2,6 +2,13 @@
   <tr class="meal-items-show">
     <td>{{mealItem.name}}</td>
     <td>{{mealItem.priceString}}</td>
-    <td>{{participantIdsToNames mealItem.participantIds}}</td>
+    <td>
+      {{#if mealItem.isEveryoneSplitting}}
+        <i>(everyone)</i>
+      {{else}}
+        {{participantsToNames mealItem.participants}}
+      {{/if}}
+    </td>
+    <td class="btn-edit-meal-item"><span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span></td>
   </tr>
 </template>

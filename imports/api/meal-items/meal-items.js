@@ -1,7 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-// includes of other models
+// imports for other models
 import { Participants } from '../participants/participants.js';
 
 class MealItemsCollection extends Mongo.Collection {
@@ -27,7 +27,7 @@ MealItems.schema = new SimpleSchema({
   name: { type: String },
   participantIds: {
     type: Array,
-    minCount: 1
+    minCount: 0
   },
   'participantIds.$': {
     type: String,
@@ -55,14 +55,18 @@ MealItems.helpers({
     return `$${this.price / 100}.00`;
   },
 
-  // Doesn't work because participant wasn't loaded...
-  // participantNames() {
-  //   if (!this.participantIds) {
-  //     return '';
-  //   }
-  //   return this.participantIds.map((id) => {
-  //     console.log(id, Participants.findOne(id));
-  //     return Participants.findOne(id).name;
-  //   }).join(',');
-  // }
+  isEveryoneSplitting() {
+    return this.participantIds.length === 0;
+  },
+
+  participants() {
+    let arr = [];
+    this.participantIds.forEach((id) => {
+      let p = Participants.findOne(id);
+      if (p) {
+        arr.push(p);
+      }
+    });
+    return arr;
+  }
 });

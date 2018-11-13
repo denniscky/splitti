@@ -1,8 +1,39 @@
 <template name="MealItems_new">
   <div class="container">
-    <h3>Enter an item</h3>
-    <input class="form-control input-meal-item-name"/>
-    <input class="form-control input-meal-item-price" size="5" maxlength="5"/>
-    <button class="btn btn-primary btn-create-meal-item">Save</button>
+    <h3>
+      Enter an item
+      <button type="button" class="close btn-cancel" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </h3>
+    <div class="form-group">
+      <label for="input-meal-item-name">Name</label>
+      <input class="form-control" id="input-meal-item-name" placeholder=""/>
+    </div>
+    <div class="form-group">
+      <label for="input-meal-item-price">Price</label>
+      <input class="form-control" id="input-meal-item-price" size="5" maxlength="5" placeholder="$0.00"/>
+    </div>
+    <div class="form-group">
+      <label>Split between...</label>
+      {{#each participant in allParticipantsSorted}}
+        <div class="checkbox">
+          <label>
+            <input class="check-individual" type="checkbox" value="{{participant._id}}" checked={{#if isParticipantMe participant}}checked{{/if}}>
+            {{participant.name}}
+            {{#if isParticipantMe participant}}
+            (me)
+            {{/if}}
+          </label>
+        </div>
+      {{/each}}
+      <hr>
+      <div class="checkbox">
+        <label>
+          <input class="check-everyone" type="checkbox" value="">
+          Everyone
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-create-meal-item pull-right">Save</button>
+    <button class="btn btn-default btn-cancel pull-right">Cancel</button>
   </div>
 </template>

@@ -1,13 +1,8 @@
 /* global confirm */
-
-// Self
 import './meal-items-show.html';
 
-// Models
+// imports for models
 import { MealItems } from '../../../api/meal-items/meal-items.js';
-import {Participants} from "../../../api/participants/participants";
-
-// Components
 
 Template.MealItems_show.onCreated(function() {
   this.autorun(() => {
@@ -18,11 +13,16 @@ Template.MealItems_show.onCreated(function() {
 });
 
 Template.MealItems_show.helpers({
-  participantIdsToNames(participantIds) {
-    if (!participantIds) {}
-    return participantIds.map((id) => {
-      console.log(id, Participants.findOne(id));
-      return Participants.findOne(id).name;
-    }).join(',');
+  participantsToNames(participants) {
+    return participants.map((p) => {
+      return p.name;
+    }).join(', ');
+  },
+});
+
+Template.MealItems_show.events({
+  'click .btn-edit-meal-item'(event, instance) {
+    console.log('click .btn-create-meal-item', instance.data.mealItem);
+    FlowRouter.go('MealItems.edit', { _mealItemId: instance.data.mealItem._id });
   }
 });
