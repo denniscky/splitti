@@ -1,6 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// includes of other models
+import { Participants } from '../participants/participants.js';
+
 class MealItemsCollection extends Mongo.Collection {
   insert(input, callback) {
     const realInput = input;
@@ -50,5 +53,16 @@ MealItems.publicFields = {
 MealItems.helpers({
   priceString() {
     return `$${this.price / 100}.00`;
-  }
+  },
+
+  // Doesn't work because participant wasn't loaded...
+  // participantNames() {
+  //   if (!this.participantIds) {
+  //     return '';
+  //   }
+  //   return this.participantIds.map((id) => {
+  //     console.log(id, Participants.findOne(id));
+  //     return Participants.findOne(id).name;
+  //   }).join(',');
+  // }
 });

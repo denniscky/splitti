@@ -1,6 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// includes of other models
+// [none]
+
 class MealsCollection extends Mongo.Collection {
   insert(input, callback) {
     const realInput = input;

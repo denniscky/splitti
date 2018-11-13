@@ -2,17 +2,33 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">{{mealCode}}</a>
+        <a class="navbar-brand" href="/">Code: {{mealCode}}</a>
       </div>
       <ul class="nav navbar-nav">
-        <li>{{mealCode}}</li>
+        <li></li>
       </ul>
     </div>
   </nav>
   <div class="container">
-    <button class="btn-new-item btn btn-primary">+ Add an item</button>
-    {{#each mealItem in mealItems}}
-      {{> MealItems_show (mealItemArgs mealItem)}}
-    {{/each}}
+    <div class="row">
+      <div class="well col-md-6 col-md-offset-3">
+        <button class="btn-new-item btn btn-primary btn-lg btn-block">+ Add an item</button>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Current items
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each mealItem in mealItems}}
+          {{> MealItems_show (mealItemArgs mealItem)}}
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>

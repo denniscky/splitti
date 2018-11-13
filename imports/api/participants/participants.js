@@ -1,6 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+// includes of other models
+// [none]
+
 class ParticipantsCollection extends Mongo.Collection {
   insert(input, callback) {
     const realInput = input;
@@ -24,7 +27,7 @@ Participants.schema = new SimpleSchema({
   mealId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-    denyUpdate: true
+    denyUpdate: true  // If you set denyUpdate: true, any collection update that modifies the field will fail.
   },
   createdAt: {
     type: Date,

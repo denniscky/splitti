@@ -1,6 +1,7 @@
 <template name="MealItems_show">
-  <div class="meal-items-show row">
-    <div class="col-xs-3">{{mealItem.name}}</div>
-    <div class="col-xs-3">{{mealItem.priceString}}</div>
-  </div>
+  <tr class="meal-items-show">
+    <td>{{mealItem.name}}</td>
+    <td>{{mealItem.priceString}}</td>
+    <td>{{participantIdsToNames mealItem.participantIds}}</td>
+  </tr>
 </template>

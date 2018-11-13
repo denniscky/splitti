@@ -9,6 +9,8 @@ export const mealItemsInsert = new ValidatedMethod({
   validate: MealItems.simpleSchema().pick([
     'mealId',
     'name',
+    'participantIds',
+    'participantIds.$',
     'price'
   ]).validator(),
   run(input) {
