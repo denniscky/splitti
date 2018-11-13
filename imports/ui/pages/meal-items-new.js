@@ -7,7 +7,7 @@ import { Participants } from '../../api/participants/participants.js';
 Template.MealItems_new.onCreated(function() {
   this.getMealId = () => FlowRouter.getParam('_mealId');
 
-  this._generateParticipantIds = () => {
+  this.generateParticipantIds = () => {
     if ($('.check-everyone').prop('checked')) {
       return [];
     }
@@ -39,12 +39,12 @@ Template.MealItems_new.helpers({
 
 Template.MealItems_new.events({
   'click .btn-create-meal-item'(event, instance) {
-    console.log('click .btn-create-meal-item', instance._generateParticipantIds());
+    console.log('click .btn-create-meal-item', instance.generateParticipantIds());
     let mealId = instance.getMealId();
     const mealItemId = mealItemsInsert.call({
       mealId: mealId,
       name: $('#input-meal-item-name').val().trim(),
-      participantIds: instance._generateParticipantIds(),
+      participantIds: instance.generateParticipantIds(),
       price: parseFloat($('#input-meal-item-price').val().trim()).toFixed(2) * 100
     }, (err) => {
       if (err) {

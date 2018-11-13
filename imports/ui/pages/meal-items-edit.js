@@ -1,5 +1,5 @@
 import './meal-items-edit.html';
-import { mealItemsInsert } from "../../api/meal-items/methods";
+import { mealItemsUpdate } from "../../api/meal-items/methods";
 
 // imports for models
 import { MealItems } from '../../api/meal-items/meal-items.js';
@@ -9,10 +9,14 @@ Template.MealItems_edit.onCreated(function() {
   this.getMealItemId = () => FlowRouter.getParam('_mealItemId');
 
   this.getMealItem = () => {
-    MealItems.findOne(this.getMealItemId());
+    return MealItems.findOne(this.getMealItemId());
   };
 
-  this._generateParticipantIds = () => {
+  this.getMealId = () => {
+    return this.getMealItem().mealId;
+  };
+
+  this.generateParticipantIds = () => {
     if ($('.check-everyone').prop('checked')) {
       return [];
     }
@@ -26,11 +30,18 @@ Template.MealItems_edit.onCreated(function() {
 
 Template.MealItems_edit.helpers({
   mealItem() {
-    Template.instance().getMealItem();
+    const instance = Template.instance();
+    return instance.getMealItem();
   },
 
-  isParticipantIdIncluded(participantId) {
+  isParticipantMe(participant) {
     return participant._id === Session.get('participantId');
+  },
+
+  isParticipantIncluded(participant) {
+    const instance = Template.instance();
+    console.log('isParticipantIdIncluded', instance.getMealItem().participantIds);
+    return instance.getMealItem().participantIds.indexOf(participant._id) !== -1;
   },
 
   allParticipantsSorted() {
@@ -43,21 +54,23 @@ Template.MealItems_edit.helpers({
 });
 
 Template.MealItems_edit.events({
-  'click .btn-create-meal-item'(event, instance) {
-    console.log('click .btn-create-meal-item', instance._generateParticipantIds());
-    let mealId = instance.getMealId();
-    const mealItemId = mealItemsInsert.call({
-      mealId: mealId,
-      name: $('#input-meal-item-name').val().trim(),
-      participantIds: instance._generateParticipantIds(),
-      price: parseFloat($('#input-meal-item-price').val().trim()).toFixed(2) * 100
-    }, (err) => {
-      if (err) {
-        console.log('err', err);
-        return;
-      }
-      FlowRouter.go('Meals.show', { _id: mealId });
-    });
+  'click .btn-save-meal-item'(event, instance) {
+    console.log('click .btn-save-meal-item', instance.generateParticipantIds());
+    let mealItemId = instance.getMealItemId();
+    let newName = $('#input-meal-item-name').val().trim();
+    mealItemsUpdate.call({
+        mealItemId: mealItemId,
+        name: newName,
+        participantIds: instance.generateParticipantIds(),
+        price: parseFloat($('#input-meal-item-price').val().trim()).toFixed(2) * 100
+      },
+      (err) => {
+        if (err) {
+          console.log('err', err);
+          return;
+        }
+        FlowRouter.go('Meals.show', { _id: instance.getMealId() });
+      });
   },
 
   'click .btn-cancel'(event, instance) {

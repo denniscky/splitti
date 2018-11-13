@@ -22,7 +22,7 @@ Template.MealItems_show.helpers({
 
 Template.MealItems_show.events({
   'click .btn-edit-meal-item'(event, instance) {
-    console.log('click .btn-create-meal-item', instance.data.mealItem);
-    FlowRouter.go('MealItems.edit', { _mealItemId: instance.data.mealItem._id });
+    console.log('click .btn-create-meal-item', Template.currentData().mealItem);
+    FlowRouter.go('MealItems.edit', { _mealItemId: Template.currentData().mealItem._id });
   }
 });

@@ -8,7 +8,12 @@ class MealItemsCollection extends Mongo.Collection {
   insert(input, callback) {
     const realInput = input;
     realInput.createdAt = new Date();
+    realInput.updatedAt = new Date();
     return super.insert(realInput, callback);
+  }
+  update(selector, modifier) {
+    console.log('model update', selector, modifier)
+    return super.update(selector, modifier);
   }
 }
 
@@ -37,7 +42,8 @@ MealItems.schema = new SimpleSchema({
   createdAt: {
     type: Date,
     denyUpdate: true  // If you set denyUpdate: true, any collection update that modifies the field will fail.
-  }
+  },
+  updatedAt: { type: Date }
 });
 
 MealItems.attachSchema(MealItems.schema);
@@ -53,6 +59,10 @@ MealItems.publicFields = {
 MealItems.helpers({
   priceString() {
     return `$${this.price / 100}.00`;
+  },
+
+  priceFloat() {
+    return (this.price / 100).toFixed(2);
   },
 
   isEveryoneSplitting() {

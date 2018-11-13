@@ -17,3 +17,24 @@ export const mealItemsInsert = new ValidatedMethod({
     return MealItems.insert(input, null);
   }
 });
+
+export const mealItemsUpdate = new ValidatedMethod({
+  name: 'todos.makeChecked',
+  validate: new SimpleSchema({
+    mealItemId: MealItems.simpleSchema().schema('_id'),
+    name: MealItems.simpleSchema().schema('name'),
+    participantIds: MealItems.simpleSchema().schema('participantIds'),
+    'participantIds.$': MealItems.simpleSchema().schema('participantIds.$'),
+    price: MealItems.simpleSchema().schema('price')
+  }).validator(),
+  run({ mealItemId, name, participantIds, price }) {
+    console.log('method', name, participantIds, price);
+    MealItems.update(mealItemId, {
+      $set: {
+        name: name,
+        participantIds: participantIds,
+        price: price
+      }
+    });
+  },
+});
