@@ -1,7 +1,6 @@
-// Self
 import './meals-show.html';
 
-// Models
+// imports for models
 import { Meals } from '../../api/meals/meals.js';
 import { MealItems } from '../../api/meal-items/meal-items.js';
 
@@ -10,19 +9,16 @@ import '../components/meal-items-show/meal-items-show.js';
 
 Template.Meals_show.onCreated(function() {
   this.getMealId = () => FlowRouter.getParam('_id');
+
+  this.getMeal = () => {
+    return Meals.findOne(this.getMealId());
+  };
 });
 
 Template.Meals_show.helpers({
-  participantId() {
-    console.log(Session.get('participantId'));
-    return Session.get('participantId');
-  },
-
-  mealCode() {
+  meal() {
     const instance = Template.instance();
-    let meal = Meals.findOne(instance.getMealId());
-    console.log("mealCode", meal);
-    return meal ? meal.code : '';
+    return instance.getMeal();
   },
 
   mealItems() {

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">Code: {{mealCode}}</a>
+        <a class="navbar-brand" href="/">Code: {{meal.code}}</a>
       </div>
       <ul class="nav navbar-nav">
         <li></li>
@@ -39,6 +39,7 @@
           <th>Item</th>
           <th>Price</th>
           <th>Paid by</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -48,5 +49,20 @@
       </tbody>
     </table>
     <h2>Breakdown</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Diner</th>
+        <th>Share</th>
+      </tr>
+      </thead>
+      <tbody>
+        {{#each participant in meal.participantsSorted}}
+          <tr>
+            <td>{{participant.name}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>

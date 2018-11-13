@@ -3,6 +3,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 // imports for other models
 import { Participants } from '../participants/participants.js';
+import { MealItems } from '../meal-items/meal-items.js';
 
 class MealsCollection extends Mongo.Collection {
   insert(input, callback) {
@@ -41,6 +42,13 @@ Meals.attachSchema(Meals.schema);
 Meals.helpers({
   participantsSorted() {
     console.log("participantsSorted");
+    return Participants.find(
+      { mealId: this._id },
+      { sort: { name: 1 }}
+    );
+  },
+
+  mealItems() {
     return Participants.find(
       { mealId: this._id },
       { sort: { name: 1 }}
